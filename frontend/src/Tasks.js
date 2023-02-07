@@ -8,6 +8,7 @@ import initialTasks from './InitialTasks';
 
 function Tasks() {
   const [tasks, setTasks] = useState(initialTasks);
+  const [showCompleatedTasks, setShowCompleatedTasks] = useState(false);
 
   const TODO_BASE_URL = 'http://localhost:3000/todos';
 
@@ -54,6 +55,12 @@ function Tasks() {
     )
   }
 
+  function filterTodo(completed) { 
+
+      setTasks((tasks) => tasks.filter((task) => task.completed == completed))
+  
+  }
+
   function setTodoCompleted(todo) {
     const putBody = JSON.stringify({
       completed: !todo.completed
@@ -95,12 +102,24 @@ function Tasks() {
           </thead>
 
           <tbody>
-            {tasks.map((todo) => {
+            {tasks.filter (todo=>todo.completed == showCompleatedTasks || !todo.completed ).map((todo) => {
               return <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} setTodoCompleted={setTodoCompleted} />
+            
             })}
           </tbody>
         </table>
       </div>
+
+     
+
+      <button
+        onClick={() => {
+         setShowCompleatedTasks (!showCompleatedTasks)
+        }}
+      >
+        {showCompleatedTasks?"show incompleate tasks": "show all Tasks"}
+      
+      </button>
 
       <div>
         <TodoForm addTodo={addTodo} />
