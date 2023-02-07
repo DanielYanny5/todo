@@ -55,10 +55,10 @@ function Tasks() {
     )
   }
 
-  function filterTodo(completed) { 
+  function filterTodo(completed) {
 
-      setTasks((tasks) => tasks.filter((task) => task.completed == completed))
-  
+    setTasks((tasks) => tasks.filter((task) => task.completed == completed))
+
   }
 
   function setTodoCompleted(todo) {
@@ -102,23 +102,23 @@ function Tasks() {
           </thead>
 
           <tbody>
-            {tasks.filter (todo=>todo.completed == showCompleatedTasks || !todo.completed ).map((todo) => {
+            {tasks.filter(todo => todo.completed == showCompleatedTasks || !todo.completed).map((todo) => {
               return <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} setTodoCompleted={setTodoCompleted} />
-            
+
             })}
           </tbody>
         </table>
       </div>
 
-     
+
 
       <button
         onClick={() => {
-         setShowCompleatedTasks (!showCompleatedTasks)
+          setShowCompleatedTasks(!showCompleatedTasks)
         }}
       >
-        {showCompleatedTasks?"show incompleate tasks": "show all Tasks"}
-      
+        {showCompleatedTasks ? "show incompleate tasks" : "show all Tasks"}
+
       </button>
 
       <div>
